@@ -1,8 +1,14 @@
 const express = require('express');
 
+const ProductController = require('./controllers/productController');
+
 const app = express();
 
 console.log('iniciando o projeto x');
+
+app.get('/products', ProductController.getAll);
+
+app.get('/products/:id', ProductController.findById);
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {
