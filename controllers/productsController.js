@@ -1,22 +1,42 @@
 const ProductService = require('../services/productsService');
 
-const getAll = async (_req, res) => {
+const getAll = async (_request, response) => {
   const products = await ProductService.getAll();
 
-  res.status(200).json(products);
+  response.status(200).json(products);
 };
 
-const findById = async (req, res) => {
-  const { id } = req.params;
+const findById = async (request, response) => {
+  const { id } = request.params;
 
   const product = await ProductService.findById(id);
 
-  if (!product) return res.status(404).json({ message: 'Product not found' });
+  if (!product) return response.status(404).json({ message: 'Product not found' });
 
-  res.status(200).json(product);
+  response.status(200).json(product);
+};
+
+const create = async (request, response) => {
+  const { name } = request.body;
+
+  // const product = await ProductService
+  //   .create(name);
+
+  // if (!product) {
+  //   return response
+  //     .status(400)
+  //     .send('Dados inválidos');
+  // }
+
+  const { id } = await ProductService.create(name);
+
+  const product = { id, name };
+
+  response.status(201).json(product);
 };
 
 module.exports = {
   getAll,
   findById,
+  create,
 };
