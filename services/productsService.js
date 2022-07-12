@@ -33,8 +33,21 @@ const create = async (name) => {
   return { code: 201, id };
 };
 
+const update = async (name, id) => {
+  const validations = validate(name);
+
+  if (validations.message) return validations;
+
+  const affectedRows = await ProductModel.update(name, id);
+
+  if (!affectedRows) return { code: 404, message: 'Product not found' };
+
+  return { code: 200, affectedRows };
+};
+
 module.exports = {
   getAll,
   findById,
   create,
+  update,
 };

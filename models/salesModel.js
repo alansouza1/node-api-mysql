@@ -62,8 +62,6 @@ const findSaleById = async (id) => {
   return sale.map(serialize);
 };
 
-// criar o findSales e renomear o findById para findProductById
-
 module.exports = {
   getAll,
   findProductById,

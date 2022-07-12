@@ -28,8 +28,22 @@ const create = async (request, response) => {
   response.status(code).json(product);
 };
 
+const update = async (request, response) => {
+  const { id } = request.params;
+  const { name } = request.body;
+
+  const { code, message, affectedRows } = await ProductService.update(name, id);
+
+  if (!affectedRows) return response.status(code).json({ message });
+
+  const product = { id, name };
+
+  response.status(200).json(product);
+};
+
 module.exports = {
   getAll,
   findById,
   create,
+  update,
 };
