@@ -19,17 +19,13 @@ const findById = async (request, response) => {
 const create = async (request, response) => {
   const { name } = request.body;
 
-  if (!name) return response.status(400).json({ message: '"name" is required' });
-  if (name.length < 5) {
-    return response
-      .status(422).json({ message: '"name" length must be at least 5 characters long' });
-  }
-
-  const { id } = await ProductService.create(name);
+  const { code, message, id } = await ProductService.create(name);
+  
+  if (!id) return response.status(code).json({ message });
 
   const product = { id, name };
 
-  response.status(201).json(product);
+  response.status(code).json(product);
 };
 
 module.exports = {

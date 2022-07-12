@@ -23,9 +23,7 @@ const create = async (name) => {
       [name],
     );
 
-  return {
-    id: result.insertId,
-  };
+  return result.insertId;
 };
 
 module.exports = {
