@@ -38,7 +38,17 @@ const update = async (request, response) => {
 
   const product = { id, name };
 
-  response.status(200).json(product);
+  response.status(code).json(product);
+};
+
+const deleteProduct = async (request, response) => {
+  const { id } = request.params;
+
+  const { code, message, affectedRows } = await ProductService.deleteProduct(id);
+
+  if (!affectedRows) return response.status(code).json({ message });
+
+  response.status(code).end();
 };
 
 module.exports = {
@@ -46,4 +56,5 @@ module.exports = {
   findById,
   create,
   update,
+  deleteProduct,
 };
