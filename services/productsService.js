@@ -14,11 +14,19 @@ const findById = async (id) => {
   return product;
 };
 
-const create = async (name) => {
+const validate = (name) => {
   if (!name) return { code: 400, message: '"name" is required' };
   if (name.length < 5) {
     return { code: 422, message: '"name" length must be at least 5 characters long' };
-  } 
+  }
+
+  return {};
+};
+
+const create = async (name) => {
+  const validations = validate(name);
+
+  if (validations.message) return validations;
 
   const id = await ProductModel.create(name);
 

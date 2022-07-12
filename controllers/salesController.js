@@ -3,11 +3,13 @@ const SalesService = require('../services/salesService');
 const create = async (request, response) => {
   const itemsSold = request.body;
 
-  const id = await SalesService.create(itemsSold);
+  const { code, message, id } = await SalesService.create(itemsSold);
 
-  const product = { id, itemsSold };
+  if (!id) return response.status(code).json({ message });
 
-  response.status(201).json(product);
+  const sale = { id, itemsSold };
+
+  response.status(code).json(sale);
 };
 
 module.exports = {

@@ -17,6 +17,22 @@ const create = async (itemsSold) => {
   return insertId;
 };
 
+const findById = async (itemsSold) => {
+  const query = 'SELECT * FROM StoreManager.products';
+  const [productData] = await connection.execute(query);
+
+  const hasProducts = itemsSold.every(({ productId }) => {
+    const result = productData.find(({ id }) => productId === id);
+
+    return result;
+  });
+
+  if (!hasProducts) return null;
+
+  return productData[0];
+};
+
 module.exports = {
   create,
+  findById,
 };
