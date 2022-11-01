@@ -19,7 +19,7 @@ const runSql = (file) => async () => {
 const recreateDatabase = runSql('/home/node/app/StoreManager.sql');
 
 if (require.main === module) {
-  recreateDatabase().then(async () => {
+  recreateDatabase().then(() => {
     console.log('Banco restaurado com sucesso');
     process.exit(0);
   });
