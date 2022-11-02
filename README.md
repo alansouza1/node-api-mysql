@@ -6,6 +6,8 @@ O projeto foi desenvolvido utilizando as camadas _Models_, _Services_ e _Control
 
 Foram criados alguns _endpoints_ que irão ler e escrever em um banco de dados, utilizando o **MySQL**.
 
+Foram feitos alguns testes testes unitários nas três camadas utilizando as ferramentas _Mocha_, _Chai_ e _Sinon_.
+
 # Rodando o Projeto
 
 ### Requisitos:
